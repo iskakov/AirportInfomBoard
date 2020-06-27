@@ -5,8 +5,13 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:AirportInfomBoard"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    <Grid>
-        
+        Title="Информационное табло аэропорта" Height="450" Width="800" WindowStartupLocation="CenterScreen"  WindowStyle="None" Style="{StaticResource WindowMain}">
+    <Grid Background="#FFD0D2CF">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition/>
+            <RowDefinition Height="auto"/>
+        </Grid.RowDefinitions>
     </Grid>
 </Window>

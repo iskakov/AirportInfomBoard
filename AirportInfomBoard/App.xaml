@@ -4,6 +4,245 @@
              xmlns:local="clr-namespace:AirportInfomBoard"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
-         
+<SolidColorBrush x:Key="Button.MouseOver.Background.Red" Color="#ff0000"/>
+        <SolidColorBrush x:Key="Button.MouseOver.Background.Orange" Color="#fecb00"/>
+        <SolidColorBrush x:Key="Button.MouseOver.Background.Green" Color="#78ff00"/>
+        <SolidColorBrush x:Key="Button.IsPressed.Background.Green" Color="#3c8000"/>
+        <Style x:Key="ButtonRollUp" TargetType="{x:Type Button}">
+           
+            
+            <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="Padding" Value="1"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Border x:Name="border"  SnapsToDevicePixels="true" Background="Transparent">
+                            <ContentPresenter x:Name="contentPresenter" Focusable="False" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsDefaulted" Value="true">
+                                <Setter Property="TextElement.Foreground" TargetName="border" Value="#ffffff"/>
+                                <Setter Property="BorderBrush" TargetName="border" Value="{DynamicResource {x:Static SystemColors.HighlightBrushKey}}"/>
+                            </Trigger>
+                            <Trigger Property="IsMouseOver" Value="true">
+
+                                <Setter Property="TextElement.Foreground" TargetName="border" Value="{StaticResource Button.MouseOver.Background.Orange}"/>
+                            </Trigger>
+                            <!--<Trigger Property="IsPressed" Value="true">
+                                <Setter Property="Background" TargetName="border" Value="#1f330d"/>
+                            </Trigger>-->
+                            <!--<Trigger Property="IsEnabled" Value="false">
+                                <Setter Property="Background" TargetName="border" Value="#1f330d"/>
+                                <Setter Property="TextElement.Foreground" TargetName="contentPresenter" Value="{StaticResource Button.Disabled.Foreground}"/>
+                            </Trigger>-->
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style x:Key="MaximazeButton" TargetType="{x:Type Button}">
+            
+            <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="Padding" Value="1"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Border x:Name="border"  SnapsToDevicePixels="true" Background="Transparent">
+                            <Grid>
+                                <Path x:Name="square" Data="M0,0v533.333h533.333V0H0z M500,500H33.333V33.333H500V500z" Fill="White" HorizontalAlignment="Center" VerticalAlignment="Center" Width="15" Height="15" Stretch="Fill" Margin="0" Opacity="1"></Path>
+
+                                <ContentPresenter x:Name="contentPresenter" Focusable="False" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                            </Grid>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsDefaulted" Value="true">
+                                <Setter Property="BorderBrush" TargetName="border" Value="{DynamicResource {x:Static SystemColors.HighlightBrushKey}}"/>
+                            </Trigger>
+                            <Trigger Property="IsMouseOver" Value="true">
+
+                                <Setter Property="Fill" TargetName="square" Value="{StaticResource Button.IsPressed.Background.Green}"/>
+                            </Trigger>
+                            <!--<Trigger Property="IsPressed" Value="true">
+                                <Setter Property="Background" TargetName="border" Value="#1f330d"/>
+                            </Trigger>-->
+                            <!--<Trigger Property="IsEnabled" Value="false">
+
+                                <Setter Property="Fill" TargetName="square" Value="{StaticResource Button.MouseOver.Background.Orange}"/>
+                            </Trigger>-->
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style x:Key="CloseButton" TargetType="{x:Type Button}">
+            
+            <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="Padding" Value="1"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Border x:Name="border"  SnapsToDevicePixels="true" Background="Transparent">
+                            <ContentPresenter x:Name="contentPresenter" Focusable="False" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsDefaulted" Value="true">
+                                <Setter Property="TextElement.Foreground" TargetName="border" Value="#ffffff"/>
+                                <Setter Property="BorderBrush" TargetName="border" Value="{DynamicResource {x:Static SystemColors.HighlightBrushKey}}"/>
+                            </Trigger>
+                            <Trigger Property="IsMouseOver" Value="true">
+                                <Setter Property="TextElement.Foreground" TargetName="border" Value="{StaticResource Button.MouseOver.Background.Red}"/>
+                            </Trigger>
+                            <!--<Trigger Property="IsPressed" Value="true">
+                                <Setter Property="Background" TargetName="border" Value="#1f330d"/>
+                            </Trigger>-->
+                            <!--<Trigger Property="IsEnabled" Value="false">
+                                <Setter Property="Background" TargetName="border" Value="#1f330d"/>
+                                <Setter Property="TextElement.Foreground" TargetName="contentPresenter" Value="{StaticResource Button.Disabled.Foreground}"/>
+                            </Trigger>-->
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style x:Key="WindowMain" TargetType="{x:Type Window}">
+            <Setter Property="AllowsTransparency" Value="True"></Setter>
+            <Setter Property="WindowStyle" Value="None"></Setter>
+
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Window}">
+                        <Border Width="Auto" Height="Auto" Name="windowFrame">
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="50"></RowDefinition>
+                                    <RowDefinition></RowDefinition>
+                                    <RowDefinition Height="Auto"></RowDefinition>
+
+                                </Grid.RowDefinitions>
+
+                                <Grid x:Name="titleBar" MouseLeftButtonDown="titleBar_MouseLeftButtonDown" Grid.Row="0" Height="50" VerticalAlignment="Top" Grid.RowSpan="2">
+
+                                    <StackPanel Grid.ColumnSpan="2" Height="50" Background="#FF204760" VerticalAlignment="Center">
+                                        <TextBlock TextAlignment="Left"
+                                           Margin="20 12.5 0 0"
+                                           Width="auto"
+                                           FontSize="20"
+                                           FontFamily="/Fonts/roboto-regular.ttf #Roboto"
+                                           Foreground="#ffffff"
+                                           Text="{TemplateBinding Title}"/>
+                                    </StackPanel>
+                                    <StackPanel Grid.Row="0" Grid.Column="1"
+                                                        Orientation="Horizontal"
+                                                        HorizontalAlignment="Right"
+                                                        VerticalAlignment="Center"
+                                                        Margin="0 0 15 0">
+                                        <Button x:Name="RollUpButton" Content="-"
+                                                                Foreground="#ffffff"
+                                                                FontSize="20"
+                                                                
+                                                                Width="20"
+                                                                Height="50"
+                                                                Margin="0 0 5 0"
+                                                                Style="{DynamicResource ButtonRollUp}" Click="RollUpButton_Click" Background="#FF204760" />
+                                        <Button x:Name="MaximazeButton" 
+                                                                Foreground="#FFB33434"
+                                                                Width="20"
+                                                                Height="50"
+                                                                Margin="0 0 5 0"
+                                                                Style="{DynamicResource MaximazeButton}" Click="MaximazeButton_Click" Background="#FF204760" />
+                                        <Button x:Name="CloseButton" Content="X"
+                                                                Foreground="#ffffff"
+                                                                
+                                                                Width="20"
+                                                                Height="50" 
+                                                                FontSize="20"
+                                                                Style="{DynamicResource CloseButton}" Click="CloseButton_Click" Background="#FF204760"/>
+                                    </StackPanel>
+                                </Grid>
+
+
+                                <Border Grid.Row="1">
+
+                                    <AdornerDecorator>
+                                        <ContentPresenter/>
+                                    </AdornerDecorator>
+
+                                </Border>
+
+                                <ContentPresenter Margin="0" 
+                                HorizontalAlignment="Center"
+                                Content="{TemplateBinding Tag}"/>
+
+                                <ResizeGrip Name="WindowResizeGrip" Grid.Row="1" Margin="0"
+                                                              HorizontalAlignment="Right"
+                                                              VerticalAlignment="Bottom"
+                                                              Visibility="Collapsed"
+                                                              IsTabStop="false" Grid.RowSpan="2"/>
+
+                                <Rectangle x:Name="RectRight1" Grid.Row="0"
+                                                Cursor="SizeWE" Fill="{x:Null}" Width="3" VerticalAlignment="Stretch" HorizontalAlignment="Right"
+                                                            MouseLeftButtonDown="main_MouseLeftButtonDown"
+                                                            MouseLeftButtonUp="main_MouseLeftButtonUp"
+                                                            MouseMove="main_MouseMove" Margin="0,10,0,0"
+                                                           />
+                                <Rectangle x:Name="RectLeft1" Grid.Row="0"
+                                                Cursor="SizeWE" Fill="{x:Null}" Width="3" VerticalAlignment="Stretch" HorizontalAlignment="Left"
+                                                            MouseLeftButtonDown="main_MouseLeftButtonDown"
+                                                            MouseLeftButtonUp="main_MouseLeftButtonUp"
+                                                            MouseMove="main_MouseMove" Margin="0,10,0,0"
+                                                           />
+
+                                <Rectangle x:Name="RectRight" Grid.Row="1"
+                                                Cursor="SizeWE" Fill="{x:Null}" Width="3" VerticalAlignment="Stretch" HorizontalAlignment="Right"
+                                                            MouseLeftButtonDown="main_MouseLeftButtonDown"
+                                                            MouseLeftButtonUp="main_MouseLeftButtonUp"
+                                                            MouseMove="main_MouseMove" Margin="0,0,0,10"
+                                                           />
+                                <Rectangle x:Name="RectLeft" Grid.Row="1"
+                                                Cursor="SizeWE" Fill="{x:Null}" Width="3" VerticalAlignment="Stretch" HorizontalAlignment="Left"
+                                                            MouseLeftButtonDown="main_MouseLeftButtonDown"
+                                                            MouseLeftButtonUp="main_MouseLeftButtonUp"
+                                                            MouseMove="main_MouseMove" Margin="0,0,0,10"
+                                                           />
+
+
+                                <Rectangle x:Name="RectTop" 
+                                             Cursor="SizeNS" Fill="{x:Null}" Height="3" HorizontalAlignment="Stretch" VerticalAlignment="Top"
+                                                       MouseLeftButtonDown="main_MouseLeftButtonDown"
+                                                       MouseLeftButtonUp="main_MouseLeftButtonUp"
+                                                       MouseMove="main_MouseMove" Grid.Row="0" Margin="10,0,10,0"/>
+
+
+                                <Rectangle x:Name="RectBot" 
+                                             Cursor="SizeNS" Fill="{x:Null}" Height="3" HorizontalAlignment="Stretch" VerticalAlignment="Bottom"
+                                                       MouseLeftButtonDown="main_MouseLeftButtonDown"
+                                                       MouseLeftButtonUp="main_MouseLeftButtonUp"
+                                                       MouseMove="main_MouseMove" Grid.Row="1" Margin="10,0,10,0"/>
+
+                            </Grid>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <MultiTrigger>
+                                <MultiTrigger.Conditions>
+                                    <Condition Property="ResizeMode" Value="CanResizeWithGrip"/>
+                                    <Condition Property="WindowState" Value="Normal"/>
+                                </MultiTrigger.Conditions>
+                                <Setter Property="Visibility" TargetName="WindowResizeGrip" Value="Visible"/>
+                            </MultiTrigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
     </Application.Resources>
 </Application>
