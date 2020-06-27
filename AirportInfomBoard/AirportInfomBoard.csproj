@@ -69,6 +69,12 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Model\CustomTimer.cs" />
+    <Compile Include="Model\Flight.cs" />
+    <Compile Include="Model\Imitation.cs" />
+    <Compile Include="Model\InformationFlights.cs" />
+    <Compile Include="Model\InformForGrapfic.cs" />
+    <Compile Include="Model\VM.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
