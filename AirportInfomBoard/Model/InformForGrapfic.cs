@@ -6,10 +6,13 @@ using System.Threading.Tasks;
 
 namespace AirportInfomBoard.Model
 {
-    public class InformForGrapfic
+    public class InformForGrapfic : VM
     {
-        public int CountPassengerArrive { get; set; }
-        public int CountPassengerDeparture { get; set; }
+        private int countPassengerDeparture;
+        private int countPassengerArrive;
+
+        public int CountPassengerArrive { get => countPassengerArrive; set { countPassengerArrive = value; OnPropertyChanged(); } }
+        public int CountPassengerDeparture { get => countPassengerDeparture; set { countPassengerDeparture = value; OnPropertyChanged(); } }
         public TimeSpan Time { get; set; }
     }
 }

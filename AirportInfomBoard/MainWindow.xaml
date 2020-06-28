@@ -13,5 +13,9 @@
             <RowDefinition/>
             <RowDefinition Height="auto"/>
         </Grid.RowDefinitions>
+        <ContentControl x:Name="timerUC"/>
+        <ContentControl x:Name="lastFlight" Grid.Row="1"/>
+        <ContentControl x:Name="infromFlights" Grid.Row="2"/>
+        <ContentControl x:Name="graphic" Grid.Row="3"/>
     </Grid>
 </Window>

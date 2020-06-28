@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace AirportInfomBoard.Model
 {
-    public class VM
+    public class VM : INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged;
         public void OnPropertyChanged([CallerMemberName] string prop = "")

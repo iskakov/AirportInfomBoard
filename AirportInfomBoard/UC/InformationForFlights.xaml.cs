@@ -1,4 +1,5 @@
-﻿using System;
+﻿using AirportInfomBoard.Model;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,9 +21,12 @@ namespace AirportInfomBoard.UC
     /// </summary>
     public partial class InformationForFlights : UserControl
     {
-        public InformationForFlights()
+        private InformationFlights informationForFlights;
+        public InformationForFlights(InformationFlights informationForFlights)
         {
             InitializeComponent();
+            this.informationForFlights = informationForFlights;
+            grid.DataContext = informationForFlights;
         }
     }
 }
