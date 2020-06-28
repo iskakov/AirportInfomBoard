@@ -6,32 +6,44 @@ using System.Threading.Tasks;
 
 namespace AirportInfomBoard.Model
 {
-    public class Flight
+    public class Flight : VM
     {
-        public int CountPassenger { get; set; }
+        
         private bool isFlight;
-        public bool IsFlight { 
+        private DateTime dateFlight;
+
+        public bool isActual;
+        private string isFlightSt;
+        private string city;
+        private string dateFlightSt;
+        private int countPassenger;
+
+        public bool IsFlight
+        {
             get
             {
                 return isFlight;
             }
-            set 
+            set
             {
                 isFlight = value;
                 if (value)
                     IsFlightSt = "Вылетел";
                 else
                     IsFlightSt = "Прилетел";
-            } 
+            }
         }
-        public DateTime DateFlight { get; set; }
-        public String CityName { get; set; }
-        public String IsFlightSt { get; set; }
+        public int CountPassenger { get => countPassenger; set { countPassenger = value; OnPropertyChanged(); } }
+        public DateTime DateFlight { get => dateFlight; set { dateFlight = value; DateFlightSt = dateFlight.ToLongDateString(); } }
+        public string DateFlightSt { get => dateFlightSt; set { dateFlightSt = value; OnPropertyChanged(); } }
+        public string City { get => city; set { city = value; OnPropertyChanged(); } }
+        public string IsFlightSt { get => isFlightSt; set { isFlightSt = value; OnPropertyChanged(); } }
 
         public Flight()
         {
             DateFlight = new DateTime();
-            CityName = "";
+
+            City = "";
         }
 
         public Flight(int countPassenger, bool isFlight, DateTime dateFlight, string cityName)
@@ -39,7 +51,8 @@ namespace AirportInfomBoard.Model
             CountPassenger = countPassenger;
             IsFlight = isFlight;
             DateFlight = dateFlight;
-            CityName = cityName;
+            City = cityName;
+            isActual = true;
         }
 
 

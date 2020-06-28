@@ -9,16 +9,16 @@
     <StackPanel x:Name="stackPanel" Background="White" Orientation="Horizontal" Height="50">
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
             <TextBlock Text="Кол. пассажиров"/>
-            <TextBlock Margin="10,0,0,0" Text="41"/>
+            <TextBlock Margin="10,0,0,0" Text="{Binding CountPassenger}"/>
         </StackPanel>
         <StackPanel Orientation="Horizontal" Margin="10,0,0,0" HorizontalAlignment="Center" VerticalAlignment="Center">
-            <TextBlock  Text="Вылетел"/>
+            <TextBlock  Text="{Binding IsFlightSt}"/>
         </StackPanel>
         <StackPanel Orientation="Horizontal" Margin="10,0,0,0" HorizontalAlignment="Center" VerticalAlignment="Center">
-            <TextBlock  Text="19.17.2020 00:00:00"/>
+            <TextBlock  Text="{Binding DateFlightSt}"/>
         </StackPanel>
         <StackPanel Orientation="Horizontal" Margin="10,0,0,0" HorizontalAlignment="Center" VerticalAlignment="Center">
-            <TextBlock  Text="Пермь"/>
+            <TextBlock  Text="{Binding City}"/>
         </StackPanel>
     </StackPanel>
 </UserControl>

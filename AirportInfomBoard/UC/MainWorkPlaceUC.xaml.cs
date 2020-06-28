@@ -1,4 +1,5 @@
-﻿using System;
+﻿using AirportInfomBoard.Model;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,9 +21,12 @@ namespace AirportInfomBoard.UC
     /// </summary>
     public partial class MainWorkPlaceUC : UserControl
     {
-        public MainWorkPlaceUC()
+
+        public MainWorkPlaceUC(InformationFlights informArrive, InformationFlights informDeparture)
         {
             InitializeComponent();
+            leftPanel.Content = new InformationForFlights(informArrive);
+            rightPanel.Content = new InformationForFlights(informDeparture);
         }
     }
 }

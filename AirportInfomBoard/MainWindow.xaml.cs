@@ -1,7 +1,10 @@
-﻿using System;
+﻿using AirportInfomBoard.Model;
+using AirportInfomBoard.UC;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -20,9 +23,17 @@ namespace AirportInfomBoard
     /// </summary>
     public partial class MainWindow : Window
     {
+        private Imitation imitation;
+        
         public MainWindow()
         {
             InitializeComponent();
+            imitation = new Imitation();
+            timerUC.Content = new TimerUC(imitation.CustomTimer);
+            lastFlight.Content = new LastFlightUC(imitation.CurrFlight);
+            infromFlights.Content = new MainWorkPlaceUC(imitation.InformArrive, imitation.InformDeparture);
+            graphic.Content = new BarChatUC(imitation.InformForGrapfics);
+            imitation.Start();
         }
     }
 }

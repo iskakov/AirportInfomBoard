@@ -1,5 +1,7 @@
-﻿using System;
+﻿using AirportInfomBoard.Model;
+using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -20,9 +22,17 @@ namespace AirportInfomBoard.UC
     /// </summary>
     public partial class BarChatUC : UserControl
     {
-        public BarChatUC()
+        private ObservableCollection<InformForGrapfic> informForGrapfic;
+        public BarChatUC(ObservableCollection<InformForGrapfic> informForGrapfic)
         {
             InitializeComponent();
+            this.informForGrapfic = informForGrapfic;
+            Vs vs = new Vs() { List = informForGrapfic};
+            chart.DataContext = vs;
+        }
+        public class Vs
+        {
+            public ObservableCollection<InformForGrapfic> List { get; set; }
         }
     }
 }

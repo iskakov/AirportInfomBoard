@@ -1,4 +1,5 @@
-﻿using System;
+﻿using AirportInfomBoard.Model;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,9 +21,17 @@ namespace AirportInfomBoard.UC
     /// </summary>
     public partial class TimerUC : UserControl
     {
-        public TimerUC()
+        private CustomTimer customTimer;
+        public TimerUC(CustomTimer customTimer)
         {
             InitializeComponent();
+            this.customTimer = customTimer;
+            grid.DataContext = this.customTimer;
+        }
+
+        private void Slider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
+        {
+
         }
     }
 }
