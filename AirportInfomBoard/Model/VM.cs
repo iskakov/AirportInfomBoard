@@ -5,6 +5,8 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
+using System.Windows.Threading;
 
 namespace AirportInfomBoard.Model
 {
@@ -13,8 +15,20 @@ namespace AirportInfomBoard.Model
         public event PropertyChangedEventHandler PropertyChanged;
         public void OnPropertyChanged([CallerMemberName] string prop = "")
         {
-            if (PropertyChanged != null)
-                PropertyChanged(this, new PropertyChangedEventArgs(prop));
+            if (Application.Current.Dispatcher.CheckAccess())
+            {
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(prop));
+
+            }
+            else
+            {
+                Application.Current.Dispatcher.BeginInvoke(
+                              DispatcherPriority.Background,
+                              new Action(() => {
+                                  PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(prop));
+                              }));
+            }
         }
+
     }
 }
