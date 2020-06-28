@@ -1,8 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
+using System.Windows.Threading;
 
 namespace AirportInfomBoard.Model
 {
@@ -33,12 +37,15 @@ namespace AirportInfomBoard.Model
                     IsFlightSt = "Прилетел";
             }
         }
-        public int CountPassenger { get => countPassenger; set { countPassenger = value; OnPropertyChanged(); } }
+        public int CountPassenger { get => countPassenger; 
+            set { countPassenger = value; OnPropertyChanged(); } }
         public DateTime DateFlight { get => dateFlight; set { dateFlight = value; DateFlightSt = dateFlight.ToLongDateString(); } }
         public string DateFlightSt { get => dateFlightSt; set { dateFlightSt = value; OnPropertyChanged(); } }
         public string City { get => city; set { city = value; OnPropertyChanged(); } }
-        public string IsFlightSt { get => isFlightSt; set { isFlightSt = value; OnPropertyChanged(); } }
+        public string IsFlightSt { get => isFlightSt;
+            set { isFlightSt = value; OnPropertyChanged(); } }
 
+        
         public Flight()
         {
             DateFlight = new DateTime();
