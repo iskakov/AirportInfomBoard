@@ -27,6 +27,7 @@ namespace AirportInfomBoard.UC
             InitializeComponent();
             this.flight = flight;
             stackPanel.DataContext = flight;
+            
         }
     }
 }
