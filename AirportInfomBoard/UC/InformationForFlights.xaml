@@ -1,0 +1,89 @@
+﻿<UserControl x:Class="AirportInfomBoard.UC.InformationForFlights"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:AirportInfomBoard.UC"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <UserControl.Triggers>
+        
+    </UserControl.Triggers>
+    <Grid >
+        <Border Background="#e4e6e3" Grid.ColumnSpan="4" Grid.RowSpan="2" BorderThickness="3" BorderBrush="Black"  CornerRadius="10">
+
+        </Border>
+        <Grid x:Name="grid"  Margin="10,0">
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="30"/>
+                <RowDefinition Height="30"/>
+                <RowDefinition Height="30"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="auto"/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+
+            <TextBlock x:Name="titleTB"  Grid.ColumnSpan="2" FontSize="20" HorizontalAlignment="Center" Margin="0,5" VerticalAlignment="Center" />
+            <TextBlock Grid.Row="1" FontSize="16" Text="Колл. пасс. в последнем рейсе:"/>
+            <TextBlock Grid.Row="1" Grid.Column="1" FontSize="16" HorizontalAlignment="Right" Margin="10,0,0,0" Text="{Binding Path = CountPassengerLastFlight, NotifyOnTargetUpdated=True}">
+                <TextBlock.Triggers>
+                    <EventTrigger RoutedEvent="Binding.TargetUpdated">
+                        <EventTrigger.Actions>
+                            <BeginStoryboard>
+                                <Storyboard TargetProperty="(TextBlock.Foreground).(SolidColorBrush.Color)" >
+                                    <ColorAnimation From="Black" To="Red"
+                                         AutoReverse="True"
+                                        
+                                         Duration="0:0:1"
+                                         />
+                                </Storyboard>
+                            </BeginStoryboard>
+                        </EventTrigger.Actions>
+                    </EventTrigger>
+                </TextBlock.Triggers>
+            </TextBlock>
+            <TextBlock Grid.Row="2" FontSize="16" Text="Колл. пасс. за последние 24 часа:"/>
+            <TextBlock  Grid.Row="2" Grid.Column="1" FontSize="16"  HorizontalAlignment="Right"  Margin="10,0,0,0" Text="{Binding Path = CountPassengerLastDay, NotifyOnTargetUpdated=True}">
+                <TextBlock.Triggers>
+                    <EventTrigger RoutedEvent="Binding.TargetUpdated">
+                        <EventTrigger.Actions>
+                            <BeginStoryboard>
+                                <Storyboard TargetProperty="(TextBlock.Foreground).(SolidColorBrush.Color)" >
+                                    <ColorAnimation From="Black" To="Red"
+                                         AutoReverse="True"
+                                        
+                                         Duration="0:0:1"
+                                         />
+                                </Storyboard>
+                            </BeginStoryboard>
+                        </EventTrigger.Actions>
+                    </EventTrigger>
+                </TextBlock.Triggers>
+            </TextBlock>
+            <TextBlock Grid.Row="3" FontSize="16" Text="Колл. пасс. за всё время работы:"/>
+            <TextBlock  Grid.Row="3" Grid.Column="1" FontSize="16"  HorizontalAlignment="Right" Margin="10,0,0,0" Text="{Binding Path = CountPassengerAllTime, NotifyOnTargetUpdated=True}">
+                 <TextBlock.Triggers>
+                    <EventTrigger RoutedEvent="Binding.TargetUpdated">
+                        <EventTrigger.Actions>
+                            <BeginStoryboard>
+                                <Storyboard TargetProperty="(TextBlock.Foreground).(SolidColorBrush.Color)" >
+                                    <ColorAnimation From="Black" To="Red"
+                                         AutoReverse="True"
+                                        
+                                         Duration="0:0:1"
+                                         />
+                                </Storyboard>
+                            </BeginStoryboard>
+                        </EventTrigger.Actions>
+                    </EventTrigger>
+                </TextBlock.Triggers>
+            </TextBlock>
+
+        </Grid>
+        
+    </Grid>
+   
+</UserControl>
