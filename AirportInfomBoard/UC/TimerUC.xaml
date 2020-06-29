@@ -42,6 +42,12 @@
                 </Setter.Value>
             </Setter>
             <Style.Triggers>
+                <Trigger Property="Validation.HasError" Value="True">
+                    <Setter Property="ToolTip"
+                        Value="{Binding RelativeSource={RelativeSource Self},
+                            Path=(Validation.Errors)[0].ErrorContent}" />
+                    <Setter Property="Foreground" Value="Red" />
+                </Trigger>
                 <MultiTrigger>
                     <MultiTrigger.Conditions>
                         <Condition Property="IsInactiveSelectionHighlightEnabled" Value="true"/>
@@ -51,6 +57,7 @@
                 </MultiTrigger>
             </Style.Triggers>
         </Style>
+        
     </UserControl.Resources>
     <Grid Height="80">
         <Border  Grid.ColumnSpan="4" Grid.RowSpan="2" Background="#e4e6e3" BorderThickness="3" BorderBrush="Black"  CornerRadius="10">
@@ -70,12 +77,19 @@
                     <EventTrigger RoutedEvent="Binding.TargetUpdated">
                         <EventTrigger.Actions>
                             <BeginStoryboard>
-                                <Storyboard TargetProperty="(TextBlock.Foreground).(SolidColorBrush.Color)" >
-                                    <ColorAnimation From="Black" To="Red"
+                                <Storyboard  >
+                                    <ColorAnimation 
+                                        Storyboard.TargetProperty="(TextBlock.Foreground).(SolidColorBrush.Color)"
+                                        From="Black" To="Red"
                                          AutoReverse="True"
-                                        
-                                         Duration="0:0:1"
+                                         Duration="0:0:0.5"
                                          />
+                                    <DoubleAnimation 
+                                        Storyboard.TargetProperty="(TextBlock.FontSize)"
+                                        From="20" To="22"
+                                         AutoReverse="True"
+                                         Duration="0:0:0.5"
+                                        />
                                 </Storyboard>
                             </BeginStoryboard>
                         </EventTrigger.Actions>
@@ -84,7 +98,15 @@
             </TextBlock>
             <TextBlock Grid.Column="1" Margin="5,0,5,0" FontSize="20" Text="{Binding Time}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
             <TextBlock Margin="5,5,5,0" Grid.Row="1" FontSize="20" Text="Текущая скорость:" HorizontalAlignment="Right" VerticalAlignment="Center"/>
-            <TextBox Margin="2,5,0,0" Grid.Row="1" Width="70" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Grid.Column="1" FontSize="20" InputScope="Number" Text="{Binding Path = CurrentSpeed, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Center" VerticalAlignment="Center" Padding="0" Style="{DynamicResource TextBoxStyle1}"/>
+            <TextBox Margin="2,5,0,0" Grid.Row="1" Width="70"  HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Grid.Column="1" FontSize="20" InputScope="Number"  HorizontalAlignment="Center" VerticalAlignment="Center" Padding="0" Style="{DynamicResource TextBoxStyle1}">
+                <TextBox.Text>
+                    <Binding Path="CurrentSpeed" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged">
+                        <Binding.ValidationRules>
+                            <DataErrorValidationRule />
+                        </Binding.ValidationRules>
+                    </Binding>
+                </TextBox.Text>
+            </TextBox>
         </Grid>
 
     </Grid>
