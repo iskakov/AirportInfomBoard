@@ -5,17 +5,24 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:AirportInfomBoard"
         mc:Ignorable="d"
-        Title="Информационное табло аэропорта" Height="450" Width="800" WindowStartupLocation="CenterScreen"  WindowStyle="None" Style="{StaticResource WindowMain}">
+        Title="Информационное табло аэропорта" Height="600" Width="900" WindowStartupLocation="CenterScreen"  WindowStyle="None" Style="{StaticResource WindowMain}">
     <Grid Background="#FFD0D2CF">
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"/>
             <RowDefinition Height="auto"/>
-            <RowDefinition/>
             <RowDefinition Height="auto"/>
+            <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-        <ContentControl x:Name="timerUC"/>
-        <ContentControl x:Name="lastFlight" Grid.Row="1"/>
-        <ContentControl x:Name="infromFlights" Grid.Row="2"/>
-        <ContentControl x:Name="graphic" Grid.Row="3"/>
+        <Grid Margin="10,10,10,0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition Width="auto"/>
+            </Grid.ColumnDefinitions>
+            <ContentControl  x:Name="timerUC" Grid.Column="1" Margin="5,0,0,0" />
+            <ContentControl x:Name="lastFlight"   Margin="0,0,5,0"/>
+        </Grid>
+        
+        <ContentControl x:Name="infromFlights" Grid.Row="2" Margin="10,10,10,0"/>
+        <ContentControl x:Name="graphic" Grid.Row="3" Margin="10,10,10,10"/>
     </Grid>
 </Window>

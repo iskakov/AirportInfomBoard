@@ -22,11 +22,15 @@ namespace AirportInfomBoard.UC
     public partial class InformationForFlights : UserControl
     {
         private InformationFlights informationForFlights;
-        public InformationForFlights(InformationFlights informationForFlights)
+        public InformationForFlights(InformationFlights informationForFlights, bool isArrive)
         {
             InitializeComponent();
             this.informationForFlights = informationForFlights;
             grid.DataContext = informationForFlights;
+            if (isArrive)
+                titleTB.Text = "Информация по прилету:";
+            else
+                titleTB.Text = "Информация по вылету:";
         }
     }
 }

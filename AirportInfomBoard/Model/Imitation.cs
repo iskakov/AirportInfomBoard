@@ -18,22 +18,12 @@ namespace AirportInfomBoard.Model
             CurrFlight = new Flight();
             Flights = new List<Flight>();
             InformForGrapfics = new ObservableCollection<InformForGrapfic>();
-            InformForGrapfics.Add(new InformForGrapfic() { Time = TimeSpan.FromHours(0) });
+            initializeInfromForGraphic();
             InformDeparture = new InformationFlights();
             InformArrive = new InformationFlights();
-
-            timer = new DispatcherTimer();
-            timer.Interval = TimeSpan.FromMilliseconds(1000);
-            timer.Tick += Move;
-            //timer.Elapsed += Move;
-            //timer.AutoReset = true;
-            CustomTimer = new CustomTimer(timer);
-
+            
             currentDate = new DateTime(2001, 1, 1, 0, 0, 0);
-            CurrFlight.DateFlight = new DateTime(2001, 1, 1, 0, 0, 0);
-            CustomTimer.Date = currentDate.ToShortDateString();
-            CustomTimer.Time = currentDate.ToShortTimeString();
-            CustomTimer.CurrentSpeed = 1000;
+            CustomTimer = new CustomTimer(currentDate);
         }
 
         public Flight CurrFlight { get; set; }
@@ -58,40 +48,47 @@ namespace AirportInfomBoard.Model
                 WorkFile.ReadFile(Flights);
             }
             // запуск таймера
-            timer.Start();
-
+            CustomTimer.Timer.Tick += Move;
+            CustomTimer.Start();
         }
 
         private void Move(object sender, EventArgs e)
         {
             int day = currentDate.Day;
-            int hour = currentDate.Hour;
+            int month = currentDate.Month;
+            int year = currentDate.Year;
+
 
             currentDate = currentDate.AddSeconds(CustomTimer.AddSecond);
-            CustomTimer.Date = currentDate.ToShortDateString();
+            
             CustomTimer.Time = currentDate.ToLongTimeString();
-            if (day < currentDate.Day)
+            if (day < currentDate.Day || month < currentDate.Month || year < currentDate.Year)
             {
                 InformDeparture.CountPassengerLastDay = 0;
                 InformArrive.CountPassengerLastDay = 0;
                 InformForGrapfics.Clear();
-                InformForGrapfics.Add(new InformForGrapfic() { Time = TimeSpan.FromHours(0) });
-            }
-            if (hour < currentDate.Hour)
-            {
-                InformForGrapfics.Add(new InformForGrapfic() { Time = TimeSpan.FromHours(currentDate.Hour) });
+                CustomTimer.Date = currentDate.ToShortDateString();
+                initializeInfromForGraphic();
             }
             var loopResult = Parallel.ForEach<Flight>(Flights, CheckFlight);
-
-           
-            
+                      
             DeleteFlights();
             if(Flights.Count == 0)
             {
-                timer.Stop();
+                CustomTimer.Stop();
+                CustomTimer.Timer.Tick -= Move;
+                CustomEvent.RaiseDelegate();
+                // событие на остановку
             }
         }
 
+        private void initializeInfromForGraphic()
+        {
+            for(int i = 0; i< 24; i++)
+            {
+                InformForGrapfics.Add(new InformForGrapfic() { Time = TimeSpan.FromHours(i) });
+            }
+        }
 
         private void CheckFlight(Flight flight, ParallelLoopState pls)
         {
@@ -130,14 +127,14 @@ namespace AirportInfomBoard.Model
                 InformDeparture.CountPassengerAllTime += flight.CountPassenger;
                 InformDeparture.CountPassengerLastDay += flight.CountPassenger;
                 InformDeparture.CountPassengerLastFlight = flight.CountPassenger;
-                InformForGrapfics[InformForGrapfics.Count - 1].CountPassengerDeparture += flight.CountPassenger;
+                InformForGrapfics[flight.DateFlight.Hour].CountPassengerDeparture += flight.CountPassenger;
             }
             else
             {
                 InformArrive.CountPassengerAllTime += flight.CountPassenger;
                 InformArrive.CountPassengerLastDay += flight.CountPassenger;
                 InformArrive.CountPassengerLastFlight = flight.CountPassenger;
-                InformForGrapfics[InformForGrapfics.Count - 1].CountPassengerArrive += flight.CountPassenger;
+                InformForGrapfics[flight.DateFlight.Hour].CountPassengerArrive += flight.CountPassenger;
 
             }
         }

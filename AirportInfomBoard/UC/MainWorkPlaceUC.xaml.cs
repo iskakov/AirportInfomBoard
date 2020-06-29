@@ -25,8 +25,14 @@ namespace AirportInfomBoard.UC
         public MainWorkPlaceUC(InformationFlights informArrive, InformationFlights informDeparture)
         {
             InitializeComponent();
-            leftPanel.Content = new InformationForFlights(informArrive);
-            rightPanel.Content = new InformationForFlights(informDeparture);
+            leftPanel.Content = new InformationForFlights(informArrive, true);
+            rightPanel.Content = new InformationForFlights(informDeparture, false);
+            CustomEvent.SignOrCloseDelegate(EndImitation, true);
+        }
+
+        private void EndImitation()
+        {
+            MessageBox.Show("Имитация закончилась.");
         }
     }
 }
