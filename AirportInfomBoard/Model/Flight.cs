@@ -42,7 +42,7 @@ namespace AirportInfomBoard.Model
             get => countPassenger;
             set { countPassenger = value; OnPropertyChanged(); }
         }
-        public DateTime DateFlight { get => dateFlight; set { dateFlight = value; DateFlightSt = dateFlight.ToLongDateString(); } }
+        public DateTime DateFlight { get => dateFlight; set { dateFlight = value; DateFlightSt = dateFlight.ToShortDateString() + " " + dateFlight.ToLongTimeString(); } }
         public string DateFlightSt { get => dateFlightSt; set { dateFlightSt = value; OnPropertyChanged(); } }
         public string City { get => city; set { city = value; OnPropertyChanged(); } }
         public string IsFlightSt

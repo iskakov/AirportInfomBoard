@@ -48,7 +48,7 @@ namespace AirportInfomBoard
             {
                 int countPass = random.Next(1, 10);
                 bool isFli = (random.Next(0, 2)) == 1 ? true : false;
-                var date = new DateTime(random.Next(2001, 2001), random.Next(1, 2), random.Next(1, 15), random.Next(0, 23), random.Next(0, 60), random.Next(0, 60));
+                var date = new DateTime(random.Next(2001, 2001), random.Next(1, 2), random.Next(1, 15), random.Next(0, 24), random.Next(0, 60), random.Next(0, 60));
                 var city = cityNames[random.Next(0, cityNames.Count)];
                 Flights.Add(new Flight(countPass, isFli, date, city));
             }
