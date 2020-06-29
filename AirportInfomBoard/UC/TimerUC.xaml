@@ -77,11 +77,19 @@
                     <EventTrigger RoutedEvent="Binding.TargetUpdated">
                         <EventTrigger.Actions>
                             <BeginStoryboard>
-                                <Storyboard TargetProperty="(TextBlock.Foreground).(SolidColorBrush.Color)" >
-                                    <ColorAnimation From="Black" To="Red"
+                                <Storyboard  >
+                                    <ColorAnimation 
+                                        Storyboard.TargetProperty="(TextBlock.Foreground).(SolidColorBrush.Color)"
+                                        From="Black" To="Red"
                                          AutoReverse="True"
-                                         Duration="0:0:1"
+                                         Duration="0:0:0.5"
                                          />
+                                    <DoubleAnimation 
+                                        Storyboard.TargetProperty="(TextBlock.FontSize)"
+                                        From="20" To="22"
+                                         AutoReverse="True"
+                                         Duration="0:0:0.5"
+                                        />
                                 </Storyboard>
                             </BeginStoryboard>
                         </EventTrigger.Actions>
