@@ -10,7 +10,7 @@ using System.Windows.Threading;
 
 namespace AirportInfomBoard.Model
 {
-    public class CustomTimer : VM
+    public class CustomTimer : VM, IDataErrorInfo
     {
         public DispatcherTimer Timer { get; }
         private string date;
@@ -38,7 +38,7 @@ namespace AirportInfomBoard.Model
             Timer.Tag = true;
         }
 
-        
+
 
         public TimeSpan TimeSpan { get => timeSpan; set { timeSpan = value; OnPropertyChanged(); } }
         public string Date { get => date; set { date = value; OnPropertyChanged("Date"); } }
@@ -49,13 +49,48 @@ namespace AirportInfomBoard.Model
             set
             {
                 currentSpeed = value;
-                AddSecond = value > 100 ? ((double)value)/100.0 + 1.0 : 1.0;
-                if(Timer.Tag != null && !(bool)Timer.Tag)
-                    Timer.Stop(); Timer.Interval = value < 100 ? TimeSpan.FromMilliseconds(1000.0 / value) : TimeSpan.FromMilliseconds(10); Timer.Start();
+                if(value > 0 && value <= 10000)
+                {
+                    AddSecond = value > 100 ? ((double)value) / 100.0 + 1.0 : 1.0;
+                    if (Timer.Tag == null) 
+                    {
+                        Timer.Stop();
+                        Timer.Interval = value < 100 ? TimeSpan.FromMilliseconds(1000.0 / value) : TimeSpan.FromMilliseconds(10);
+                        Timer.Start();
+                    }
+                }
                 OnPropertyChanged();
             }
         }
 
         public double AddSecond { get; set; }
+
+        public string Error { get; }
+
+        public string this[string columnName]
+        {
+            get
+            {
+                string error = String.Empty;
+                switch (columnName)
+                {
+                    case "CurrentSpeed":
+                        if(CurrentSpeed == 0)
+                        {
+                            error = "Не должно быть нулем";
+                        }
+                        if(CurrentSpeed < 0)
+                        {
+                            error = "Не должно быть отрицательным";
+                        }
+                        if (CurrentSpeed > 10000)
+                        {
+                            error = "Не должно превышать 10000";
+                        }
+                        break;
+                }
+                return error;
+            }
+        }
     }
 }
