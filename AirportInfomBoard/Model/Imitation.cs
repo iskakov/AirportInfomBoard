@@ -100,6 +100,7 @@ namespace AirportInfomBoard.Model
                 CurrFlight.City = flight.City;
                 CurrFlight.IsFlight = flight.IsFlight;
                 flight.isActual = false;
+                CurrFlight.IsNew = flight.IsNew;
                 CheckInformationFlight(flight);
             }
             else

@@ -21,6 +21,7 @@ namespace AirportInfomBoard.Model
         private string city;
         private string dateFlightSt;
         private int countPassenger;
+        private Visibility isNew;
 
         public bool IsFlight
         {
@@ -42,7 +43,7 @@ namespace AirportInfomBoard.Model
             get => countPassenger;
             set { countPassenger = value; OnPropertyChanged(); }
         }
-        public DateTime DateFlight { get => dateFlight; set { dateFlight = value; DateFlightSt = dateFlight.ToShortDateString() + " " + dateFlight.ToLongTimeString(); } }
+        public DateTime DateFlight { get => dateFlight; set { dateFlight = value; DateFlightSt = dateFlight.ToShortDateString() + " " + dateFlight.ToShortTimeString(); } }
         public string DateFlightSt { get => dateFlightSt; set { dateFlightSt = value; OnPropertyChanged(); } }
         public string City { get => city; set { city = value; OnPropertyChanged(); } }
         public string IsFlightSt
@@ -51,11 +52,12 @@ namespace AirportInfomBoard.Model
             set { isFlightSt = value; OnPropertyChanged(); }
         }
 
+        public Visibility IsNew { get => isNew; set { isNew = value; OnPropertyChanged(); } }
 
         public Flight()
         {
             DateFlight = new DateTime();
-
+            IsNew = Visibility.Collapsed;
             City = "";
         }
 
@@ -66,12 +68,13 @@ namespace AirportInfomBoard.Model
             DateFlight = dateFlight;
             City = cityName;
             isActual = true;
+            IsNew = Visibility.Visible;
         }
 
         public Flight(string fligthSt)
         {
             var mass = fligthSt.Split(';');
-            if(mass.Length == 4)
+            if (mass.Length == 4)
             {
                 countPassenger = int.Parse(mass[0]);
                 IsFlight = mass[1].Equals("Вылетел") ? true : false;

@@ -50,7 +50,7 @@ namespace AirportInfomBoard.Model
             {
                 currentSpeed = value;
                 AddSecond = value > 100 ? ((double)value)/100.0 + 1.0 : 1.0;
-                if(!(bool)Timer.Tag)
+                if(Timer.Tag != null && !(bool)Timer.Tag)
                     Timer.Stop(); Timer.Interval = value < 100 ? TimeSpan.FromMilliseconds(1000.0 / value) : TimeSpan.FromMilliseconds(10); Timer.Start();
                 OnPropertyChanged();
             }
