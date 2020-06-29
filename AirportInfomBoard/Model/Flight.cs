@@ -12,7 +12,7 @@ namespace AirportInfomBoard.Model
 {
     public class Flight : VM
     {
-        
+
         private bool isFlight;
         private DateTime dateFlight;
 
@@ -37,15 +37,21 @@ namespace AirportInfomBoard.Model
                     IsFlightSt = "Прилетел";
             }
         }
-        public int CountPassenger { get => countPassenger; 
-            set { countPassenger = value; OnPropertyChanged(); } }
+        public int CountPassenger
+        {
+            get => countPassenger;
+            set { countPassenger = value; OnPropertyChanged(); }
+        }
         public DateTime DateFlight { get => dateFlight; set { dateFlight = value; DateFlightSt = dateFlight.ToLongDateString(); } }
         public string DateFlightSt { get => dateFlightSt; set { dateFlightSt = value; OnPropertyChanged(); } }
         public string City { get => city; set { city = value; OnPropertyChanged(); } }
-        public string IsFlightSt { get => isFlightSt;
-            set { isFlightSt = value; OnPropertyChanged(); } }
+        public string IsFlightSt
+        {
+            get => isFlightSt;
+            set { isFlightSt = value; OnPropertyChanged(); }
+        }
 
-        
+
         public Flight()
         {
             DateFlight = new DateTime();
@@ -62,6 +68,22 @@ namespace AirportInfomBoard.Model
             isActual = true;
         }
 
+        public Flight(string fligthSt)
+        {
+            var mass = fligthSt.Split(';');
+            if(mass.Length == 4)
+            {
+                countPassenger = int.Parse(mass[0]);
+                IsFlight = mass[1].Equals("Вылетел") ? true : false;
+                DateFlight = DateTime.Parse(mass[2]);
+                isActual = true;
+                city = mass[3];
+            }
+        }
 
+        public override string ToString()
+        {
+            return CountPassenger.ToString() + ";" + IsFlightSt + ";" + dateFlight.ToShortDateString() + " " + dateFlight.ToLongTimeString() + ";" + City;
+        }
     }
 }

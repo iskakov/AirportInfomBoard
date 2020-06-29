@@ -76,6 +76,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Model\Flight.cs" />
     <Compile Include="UC\BarChatUC.xaml.cs">
       <DependentUpon>BarChatUC.xaml</DependentUpon>
     </Compile>
@@ -91,6 +92,7 @@
     <Compile Include="UC\TimerUC.xaml.cs">
       <DependentUpon>TimerUC.xaml</DependentUpon>
     </Compile>
+    <Compile Include="WorkFile.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -126,7 +128,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Model\CustomTimer.cs" />
-    <Compile Include="Model\Flight.cs" />
     <Compile Include="Model\Imitation.cs" />
     <Compile Include="Model\InformationFlights.cs" />
     <Compile Include="Model\InformForGrapfic.cs" />

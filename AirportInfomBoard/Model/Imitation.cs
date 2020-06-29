@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.IO;
 using System.Linq;
 using System.Text;
 
@@ -47,18 +48,16 @@ namespace AirportInfomBoard.Model
         {
             Random random = new Random();
             // заполнение из файла
-            for(int i = 0; i < 10000; i++)
+            try
             {
-                int countPass = random.Next(1, 10);
-                bool isFli = (random.Next(0, 2)) == 1 ? true : false;
-                var date = new DateTime(random.Next(2001,2001), random.Next(1, 2), random.Next(1, 15), random.Next(0, 23), random.Next(0, 60), random.Next(0, 60));
-                Flights.Add(new Flight(countPass, isFli, date, "Пермь"));
+                WorkFile.ReadFile(Flights);
             }
-            
-
-            Flights.Sort((flight1, flight2) => flight1.DateFlight.CompareTo(flight2.DateFlight));
+            catch
+            {
+                WorkFile.GenerateFile();
+                WorkFile.ReadFile(Flights);
+            }
             // запуск таймера
-            
             timer.Start();
 
         }
