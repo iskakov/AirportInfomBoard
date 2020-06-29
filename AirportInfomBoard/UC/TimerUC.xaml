@@ -65,10 +65,26 @@
                 <RowDefinition/>
                 <RowDefinition/>
             </Grid.RowDefinitions>
-            <TextBlock FontSize="20" Text="{Binding Date}" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,0,5,0" />
+            <TextBlock FontSize="20" Text="{Binding Path = Date, NotifyOnTargetUpdated=True}" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,0,5,0" >
+                <TextBlock.Triggers>
+                    <EventTrigger RoutedEvent="Binding.TargetUpdated">
+                        <EventTrigger.Actions>
+                            <BeginStoryboard>
+                                <Storyboard TargetProperty="(TextBlock.Foreground).(SolidColorBrush.Color)" >
+                                    <ColorAnimation From="Black" To="Red"
+                                         AutoReverse="True"
+                                        
+                                         Duration="0:0:1"
+                                         />
+                                </Storyboard>
+                            </BeginStoryboard>
+                        </EventTrigger.Actions>
+                    </EventTrigger>
+                </TextBlock.Triggers>
+            </TextBlock>
             <TextBlock Grid.Column="1" Margin="5,0,5,0" FontSize="20" Text="{Binding Time}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
             <TextBlock Margin="5,5,5,0" Grid.Row="1" FontSize="20" Text="Текущая скорость:" HorizontalAlignment="Right" VerticalAlignment="Center"/>
-            <TextBox Margin="2,5,0,0" Grid.Row="1" Width="70" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Grid.Column="1" FontSize="20" Text="{Binding Path = CurrentSpeed, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Center" VerticalAlignment="Center" Padding="0" Style="{DynamicResource TextBoxStyle1}"/>
+            <TextBox Margin="2,5,0,0" Grid.Row="1" Width="70" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Grid.Column="1" FontSize="20" InputScope="Number" Text="{Binding Path = CurrentSpeed, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Center" VerticalAlignment="Center" Padding="0" Style="{DynamicResource TextBoxStyle1}"/>
         </Grid>
 
     </Grid>
